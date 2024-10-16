@@ -1,0 +1,28 @@
+.contacts1-container {
+    max-width: 600px; /* Максимальная ширина контейнера */
+    margin: 20px auto; /* Центрирование контейнера с отступами */
+    padding: 20px; /* Внутренние отступы */
+    background-color: #ffffff; /* Цвет фона */
+    border-radius: 5px; /* Закругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Тень для глубины */
+}
+
+.contacts1-container h1 {
+    font-size: 24px; /* Размер шрифта для заголовка */
+    margin-bottom: 20px; /* Отступ снизу */
+    text-align: center; /* Центрирование текста */
+    color: #000000; /* Цвет текста */
+}
+
+.contacts1-container h2 {
+    font-size: 20px; /* Размер шрифта для подзаголовков */
+    margin-top: 20px; /* Отступ сверху */
+    margin-bottom: 10px; /* Отступ снизу */
+    color: #000000; /* Цвет текста */
+}
+
+.contacts1-container p {
+    font-size: 16px; /* Размер шрифта для параграфов */
+    margin-bottom: 10px; /* Отступ снизу */
+    color: #666; /* Цвет текста */
+}
