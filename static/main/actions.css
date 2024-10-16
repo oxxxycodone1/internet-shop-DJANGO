@@ -1,0 +1,31 @@
+.actions-container {
+    text-decoration: none; /* Убираем подчеркивание */
+    max-width: 1800px; /* Уменьшенная максимальная ширина для лучшего отображения на больших экранах */
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.actions-detail {
+    text-decoration: none; /* Убираем подчеркивание */
+    max-width: 1800px; /* Уменьшенная максимальная ширина для лучшего отображения на больших экранах */
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.product-gallery {
+    text-decoration: none; /* Убираем подчеркивание */
+    flex: 1;
+    max-width: 45%;
+}
+
+.actions-detail img {
+    width: 80%;
+    height: 500;
+}
+
+.actions-detail {
+    text-decoration: none; /* Убираем подчеркивание */
+    flex: 1;
+    max-width: 45%;
+}
+

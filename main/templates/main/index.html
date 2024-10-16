@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<div class="container">
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'main/logo.jpg' %}" alt="Логотип">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Поиск по товарам...">
+                <button>Поиск</button>
+            </div>
+            <div class="contacts-container">
+                <div class="contacts-info">
+                    <p>☎️​ +7 (123) 456-7890</p>
+
+                </div>
+                <div class="contacts-login">
+                    <ul>
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'profile' %}" class="button" data-text="Профиль">
+                                    <span class="actual-text">&nbsp;Профиль&nbsp;</span>
+                                </a>
+                                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="logout-button">Выйти</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'login' %}" class="button" data-text="Войти">
+                                    <span class="actual-text">&nbsp;Войти&nbsp;</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<div>
+    <nav class="nav-bar1">
+        <ul class="nav-menu1">
+            <li class="nav-item">
+                <a href="{% url 'catalog' %}" class="button" data-text="Каталог">
+                    <span class="actual-text">&nbsp;<i class="fas fa-th"></i> Каталог&nbsp;</span>
+                </a>
+                <ul class="catalog-menu">
+                    {% for catalog in catalogs %}
+                        <li class="catalog-item">
+                            <a href="{% url 'category' catalog.id %}">
+                                <i class="fas fa-laptop"></i> {{ catalog.name }}
+                            </a>
+                            <div class="category-container">
+                                <ul class="category-menu">
+                                    {% for category in catalog.categories.all %}
+                                        <li class="category-item">
+                                            <a href="{% url 'category' catalog.id %}">
+                                                <i class="fas fa-desktop"></i> {{ category.name }}
+                                            </a>
+                                            <ul class="subcategory-menu">
+                                                {% for subcategory in category.subcategories.all %}
+                                                    <li class="subcategory-item">
+                                                        <a href="{% url 'subcategory' catalog.id subcategory.id %}">{{ subcategory.name }}</a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>             
+            <li class="nav-item"><a href="{% url 'actions_list' %}" class="button" data-text="Акции">
+                <span class="actual-text">&nbsp;Акции&nbsp;</span>
+            </a></li>
+            <li class="nav-item"><a href="{% url 'news_list' %}" class="button" data-text="Новости">
+                <span class="actual-text">&nbsp;Новости&nbsp;</span>
+            </a></li>
+            <li class="nav-item"><a href="{% url 'company' %}" class="button" data-text="О нас">
+                <span class="actual-text">&nbsp;О нас&nbsp;</span>
+            </a></li>
+            <li class="nav-item"><a href="{% url 'contacts' %}" class="button" data-text="Контакты">
+                <span class="actual-text">&nbsp;Контакты&nbsp;</span>
+            </a></li>
+            <li class="nav-item"><a href="{% url 'cart_detail' %}"class="button" data-text="Корзина">
+                <span class="actual-text">&nbsp;Корзина&nbsp;</span>
+            </a></li>
+        </ul>
+    </nav>
+</div>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer>
+            <p>© 2024 Магазин. Все права защищены.</p>
+        </footer>
+
+</body>
+</html>

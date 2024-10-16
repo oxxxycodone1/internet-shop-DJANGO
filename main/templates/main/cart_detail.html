@@ -1,0 +1,46 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/cart.css' %}">
+</head>
+<body>
+    <main>
+        <div class="cart-container">
+            <h1>Корзина</h1>
+            <div class="cart-content">
+                {% if items %}
+                    <ul class="cart-items">
+                        {% for item in items %}
+                            <li class="cart-item">
+                                <img src="{{ item.get_product_image_url }}" alt="{{ item.get_product_name }}" class="cart-item-image">
+                                <div class="cart-item-info">
+                                    <span class="cart-item-name">{{ item.get_product_name }}</span>
+                                    <span class="cart-item-quantity">{{ item.quantity }} шт.</span>
+                                    <span class="cart-item-price">{{ item.get_total_price }} руб.</span>
+                                    <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="remove-button">Удалить</button>
+                                    </form>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="cart-summary">
+                        <p class="cart-total">Итого: {{ cart.get_total_price }} руб.</p>
+                        <button type="button" class="checkout-button">Оформить заказ</button>
+                    </div>
+                {% else %}
+                    <p class="empty-cart">Ваша корзина пуста</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+</body>
+{% endblock %}

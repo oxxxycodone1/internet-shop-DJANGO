@@ -1,0 +1,148 @@
+nav.main-nav {
+    background-color: #007bff;
+    color: white;
+}
+
+nav.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav.main-nav li {
+    margin: 0;
+}
+
+nav.main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    display: block;
+}
+
+nav.main-nav a:hover {
+    background-color: #0056b3;
+    border-radius: 4px;
+}
+
+main {
+    padding: 20px;
+}
+
+.product-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.product-gallery {
+    flex: 1;
+    max-width: 45%;
+}
+
+.product-gallery img {
+    width: 80%;
+    height: 500;
+}
+
+.product-info {
+    flex: 1;
+    max-width: 45%;
+}
+
+.product-info h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-size: 20px;
+    color: #ff5722;
+    margin-bottom: 20px;
+}
+
+.product-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.action-buttons button:hover {
+    background-color: #0056b3;
+}
+
+.product-extra-info {
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.product-specs, .product-reviews {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.product-specs h2, .product-reviews h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.product-specs table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.product-specs table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.product-reviews .review {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-reviews .review p {
+    margin: 5px 0;
+}
+
+.product-reviews .review strong {
+    font-weight: bold;
+}
+
+.product-specs table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.product-specs th, .product-specs td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.product-specs th {
+    background-color: #f2f2f2;
+}

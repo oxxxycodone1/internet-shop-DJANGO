@@ -1,0 +1,55 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/company.css' %}">
+</head>
+<body>
+    <div class="container1">
+        <!-- Боковая панель -->
+        <aside class="sidebar">
+            <h2>О компании</h2>
+            <ul class="company-list">
+                <li><a href="{% url 'company' %}">О компании</a></li>
+                <li><a href="{% url 'news_list' %}">Новости</a></li>
+                <li><a href="{% url 'contacts' %}">Контакты</a></li>
+            </ul>
+            <div class="news-container"> <!-- Новый контейнер для новостей -->
+                <h3>Последние новости</h3>
+                <div class="news">
+                    {% for news_item in news_list %}
+                        <div class="news-block">
+                            <a href="{% url 'news' news_item.id %}" class="news-link">
+                                <div class="news-text">
+                                    <p class="news-date">{{ news_item.published_at|date:"d.m.Y" }}</p>
+                                    <p class="news-title">{{ news_item.name }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {% empty %}
+                        <p>Нет доступных новостей.</p>
+                    {% endfor %}
+                </div>
+            </div>  
+        </aside>
+
+        <!-- Основной контент компании -->
+        <div class="company-container">
+            <div class="company-block">
+                {% if company.image %}
+                    <img src="{{ company.image.url }}" alt="{{ company.name }}" class="company-image">
+                {% endif %}
+                <div class="company-description">
+                    {{ company.description|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

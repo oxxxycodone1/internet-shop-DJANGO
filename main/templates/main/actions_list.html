@@ -1,0 +1,67 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/actions_list.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Добавить jQuery -->
+</head>
+<div class="actions-container">
+    <h1>Акции</h1>
+    {% for actions_item in actions_list %}
+        <div class="actions-block" data-end-date="{{ actions_item.end_date|date:"c" }}">
+            <a href="{% url 'actions' actions_item.id %}" class="actions-link">
+                <div class="actions-content">
+                    <img src="{{ actions_item.image.url }}" alt="{{ actions_item.name }}">
+                    <div class="actions-text">
+                        <h2 class="actions-title">{{ actions_item.name }}</h2>
+                        <h4> С <class="actions-date">{{ actions_item.start_date|date:"d.m.Y" }} по <class="actions-date">{{ actions_item.end_date|date:"d.m.Y" }}</h4>
+                        <h4 class="time-left">Осталось: <span></span></h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <p>Нет доступных акций.</p>
+    {% endfor %}
+</div>
+
+
+<script>
+$(document).ready(function() {
+    // Функция для вычисления оставшегося времени
+    function updateCountdown() {
+        $('.actions-block').each(function() {
+            var endDate = new Date($(this).data('end-date')).getTime();
+            var now = new Date().getTime();
+            var distance = endDate - now;
+
+            console.log("End Date:", endDate); // Для отладки
+            console.log("Current Date:", now); // Для отладки
+            console.log("Distance:", distance); // Для отладки
+
+            // Вычисление времени
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            // Обновление текста оставшегося времени
+            if (distance > 0) {
+                $(this).find('.time-left span').text(days + "д:" + hours + "ч:" + minutes + "м");
+            } else {
+                $(this).find('.time-left span').text("Акция завершена");
+            }
+        });
+    }
+
+    // Обновляем счетчик каждые 60 секунд
+    updateCountdown(); // Первоначальный вызов
+    setInterval(updateCountdown, 60000);
+});
+</script>
+{% endblock %}

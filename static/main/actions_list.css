@@ -1,0 +1,83 @@
+.actions-container {
+    text-decoration: none; /* Убираем подчеркивание */
+    max-width: 1800px; /* Уменьшенная максимальная ширина для лучшего отображения на больших экранах */
+    margin: 0 auto;
+    padding: 0px;
+}
+
+.actions-block {
+    background-color: #fff; /* Цвет фона блока */
+    border: 1px solid #ccc; /* Рамка блока */
+    border-radius: 10px; /* Скругление углов */
+    margin: 20px; /* Отступы вокруг блока */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Тень для блока */
+    transition: transform 0.3s, box-shadow 0.3s; /* Плавный переход для эффекта при наведении */
+}
+
+.actions-block:hover {
+    transform: scale(1.05); /* Увеличение блока при наведении */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Увеличение тени при наведении */
+}
+
+/* Контент блока */
+.actions-content {
+    display: flex; /* Используем Flexbox для выравнивания элементов */
+    align-items: center; /* Центрируем элементы по вертикали */
+    padding: 30px; /* Отступы внутри блока */
+    text-decoration: none; /* Убираем подчеркивание у ссылки */
+}
+
+/* Убираем подчеркивание у ссылки */
+.actions-link {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: inherit; /* Унаследовать цвет текста */
+}
+
+/* Стили для изображения в блоке каталога */
+.actions-content img {
+    max-width: 20%; /* Ограничение ширины изображения */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    border-radius: 10px; /* Скругление углов изображения */
+    margin-right: 20px; /* Отступ справа от изображения */
+}
+
+/* Стили для текста в блоке каталога */
+.actions-text {
+    display: flex; /* Используем Flexbox для выравнивания заголовка и параграфа */
+    flex-direction: column; /* Вертикальное расположение элементов */
+}
+
+/* Стили для заголовка каталога */
+.actions-title {
+    font-size: 1.5em; /* Размер шрифта заголовка */
+    margin: 0; /* Убираем отступы */
+    color: #000000; /* Цвет текста заголовка */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Легкая тень для заголовков */
+}
+
+/* Стили для параграфа */
+.actions-block p {
+    text-align: left; /* Выравнивание текста влево */
+    margin: 5px 0 0; /* Убираем отступы, кроме верхнего */
+}
+
+.actions-date {
+    font-size: 1em;
+    color: #000000;
+    margin-top: 5px;
+}
+
+.time-left {
+    font-size: 1em; /* Размер шрифта для текста времени */
+    color: #000000; /* Цвет текста, например, оранжевый для выделения */
+    margin-top: 10px; /* Отступ сверху для лучшего восприятия */
+    font-weight: bold; /* Жирный шрифт для выделения */
+}
+
+.actions-block:nth-child(even) {
+    background-color: #f9f9f9; /* Светло-серый фон для четных блоков */
+}
+
+.actions-block:nth-child(odd) {
+    background-color: #ffffff; /* Белый фон для нечетных блоков */
+}

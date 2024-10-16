@@ -1,0 +1,120 @@
+.container1 {
+    display: flex;
+    margin: 0 auto; /* Центрирование контейнера */
+    border-radius: 5px;
+}
+
+.sidebar {
+    width: 30%; /* Ширина боковой панели */
+    background-color: #ffffff; /* Цвет фона боковой панели */
+    padding: 20px;
+    color: #000000; /* Цвет текста */
+    margin-right: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar h2 {
+    text-align: center; /* Центрирование заголовка */
+    margin-bottom: 20px;
+    font-size: 24px; /* Размер шрифта заголовка */
+}
+
+.company-list {
+    list-style-type: none; /* Убираем маркеры у списка */
+    padding: 0; /* Убираем отступы */
+}
+
+.company-list li {
+    margin: 15px 0; /* Отступы между пунктами списка */
+}
+
+.company-list a {
+    color: #000000; /* Цвет ссылок */
+    text-decoration: none; /* Убираем подчеркивание */
+    display: block; /* Занимаем всю ширину ссылки */
+    text-align: center; /* Центрирование текста */
+    padding: 10px;
+    background-color: #ffffff; /* Цвет фона ссылки */
+    border-radius: 10px; /* Закругленные углы */
+    transition: background-color 0.3s ease; /* Плавный переход фона */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+}
+
+.company-list a:hover {
+    color: #001677; /* Цвет фона при наведении */
+}
+
+.company-container {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    flex-grow: 1; /* Занимает оставшееся пространство */
+    padding: 40px; /* Отступ внутри основного контента */
+    background-color: #fff; /* Цвет фона основного контента */
+}
+
+.company-title {
+    font-size: 28px; /* Размер шрифта заголовка компании */
+    margin-bottom: 20px;
+    color: #333; /* Цвет текста заголовка */
+}
+
+.company-image {
+    max-width: 100%; /* Максимальная ширина изображения */
+    height: auto; /* Автоматическая высота изображения */
+    margin-bottom: 20px;
+    border-radius: 5px; /* Закругленные углы у изображения */
+}
+
+.company-description {
+    font-size: 16px; /* Размер шрифта описания */
+    line-height: 1.6; /* Высота строки для лучшей читаемости */
+    color: #000000; /* Цвет текста описания */
+}
+
+.news-container {
+    margin-top: 20px; /* Отступ сверху для новостей */
+}
+
+.news-container h3 {
+    text-align: center; /* Отступ сверху для новостей */
+}
+
+
+.news {
+    display: flex; /* Используем flexbox для расположения новостей */
+    flex-direction: column; /* Вертикальное расположение */
+    gap: 10px; /* Промежуток между новостями */
+}
+
+.news-block {
+    background-color: #ffffff; /* Цвет фона для блока новостей */
+    border: 1px solid #ddd; /* Граница вокруг блока */
+    border-radius: 5px; /* Закругленные углы */
+    padding: 10px; /* Внутренние отступы */
+    transition: background-color 0.3s; /* Плавный переход фона при наведении */
+}
+
+.news-block:hover {
+    background-color: #f1f1f1; /* Цвет фона при наведении */
+}
+
+.news-block a {
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    color: inherit; /* Наследуем цвет текста от родительского элемента */
+}
+
+.news-title {
+    font-size: 18px; /* Размер шрифта заголовка */
+    font-weight: bold; /* Жирный шрифт для заголовка */
+}
+
+.news-date {
+    font-size: 14px; /* Размер шрифта даты */
+    color: #000000; /* Цвет для даты */
+}
+
+.news-text {
+    font-weight: 200; /* Обычный вес */
+}

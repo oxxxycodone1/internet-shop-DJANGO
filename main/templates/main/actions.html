@@ -1,0 +1,27 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/actions.css' %}">
+</head>
+<div class="actions-detail">
+    <h1>{{ actionss.name }}</h1>
+    <img src="{{ actions.image.url }}" alt="{{ actions.name }}">
+    <p>{{ actions.description|safe }}</p>  <!-- Добавляем |safe -->
+    <p>Дата начала акции: {{ actions.start_date|date:"d.m.Y H:i" }}</p> <!-- Дата начала акции -->
+    <p>Дата окончания акции: {{ actions.end_date|date:"d.m.Y H:i" }}</p> <!-- Дата конца акции -->
+    <p>Осталось времени до конца акции: 
+        {% if actions.time_left != "Акция завершена" %}
+            {{ actions.time_left.days }} дней, 
+        {% else %}
+            {{ actions.time_left }}
+        {% endif %}
+    </p>
+</div>
+{% endblock %}

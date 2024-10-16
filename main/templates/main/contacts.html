@@ -1,0 +1,25 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/contacts.css' %}">
+</head>
+<body>
+    <div class="contacts1-container">
+        <h1>КОНТАКТЫ</h1>
+        <h2>Адрес офиса</h2>
+        <p>г. Москва,</p>
+        <p>ул. Советская, д.12</p>
+        <h2>Телефон:</h2>
+        <p>Офис: 533 5-55-55</p>
+        <p>Интернет магазин: 533 00-001</p>
+    </div>
+</body>
+
+{% endblock %}

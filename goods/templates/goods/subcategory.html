@@ -1,0 +1,102 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }}</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'goods/subcategory.css' %}">
+</head>
+
+<body>
+    <div class="container1">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Навигация</h2>
+            <ul class="catalog-list">
+                {% for category in categories %}
+                    <li>
+                        <a href="{% url 'category' catalog.id %}">{{ category.name }}</a>
+                        {% if category.subcategories.count > 0 %}
+                            <ul class="subcategory-list">
+                                {% for subcategory in category.subcategories.all %}
+                                    <li>
+                                        <a href="{% url 'subcategory' catalog.id subcategory.id %}">
+                                            {{ subcategory.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>{{ catalog.name }}</h1>
+            <div class="filters">
+                <form method="GET" id="filterForm">
+                    <div class="filter-row">
+                        {% for filter in filters %}
+                            <div class="filter-group dropdown">
+                                <button type="button" class="dropbtn">{{ filter.name }}</button>
+                                <div class="dropdown-content">
+                                    {% if filter.filter_type == 'select' %}
+                                        {% for option in filter.options.all %}
+                                            <div class="filter-option">
+                                                <input type="checkbox" name="filter" value="{{ option.value }}" id="filter_{{ option.id }}" onchange="this.form.submit()" {% if option.value in request.GET.filter %}checked{% endif %}>
+                                                <label for="filter_{{ option.id }}">{{ option.value }}</label>
+                                            </div>
+                                        {% endfor %}
+                                    {% elif filter.filter_type == 'range' %}
+                                        <div class="range-filter">
+                                            <label for="{{ filter.name }}_min">Min:</label>
+                                            <input type="number" name="{{ filter.name }}_min" step="0.1" onchange="this.form.submit()">
+                                            
+                                            <label for="{{ filter.name }}_max">Max:</label>
+                                            <input type="number" name="{{ filter.name }}_max" step="0.1" onchange="this.form.submit()">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+            
+            
+            
+            <!-- Product List -->
+            {% if products %}
+                <div class="product-list">
+                    {% for product in products %}
+                    <div class="product">
+                        <a href="{% url 'product' catalog.id product.subcategory.id product.id %}">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{% static 'goods/placeholder/placeholder.jpg' %}" alt="placeholder">
+                            {% endif %}
+                        </a>
+                        <h3>
+                            <a href="{% url 'product' catalog.id product.subcategory.id product.id %}">
+                                {{ product.name }}
+                            </a>
+                        </h3>
+                        <p>{{ product.price }} руб.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Товары не найдены.</p>
+            {% endif %}
+        </main>     
+    </div>
+</body>
+{% endblock %}
+    

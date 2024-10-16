@@ -1,0 +1,32 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/news_list.css' %}">
+</head>
+<div class="news-container">
+    <h1>Новости</h1>
+    {% for news_item in news_list %}
+        <div class="news-block">
+            <a href="{% url 'news' news_item.id %}" class="news-link">
+                <div class="news-content">
+                    <img src="{{ news_item.image.url }}" alt="{{ news_item.name }}">
+                    <div class="news-text">
+                        <h2 class="news-title">{{ news_item.name }}</h2>
+                        <h4 class="news-date">{{ news_item.published_at|date:"d.m.Y" }}</h4> <!-- Дата публикации -->
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <p>Нет доступных новостей.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

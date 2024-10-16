@@ -1,0 +1,71 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }}</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'goods/product_detail.css' %}">
+</head>
+<main>
+    <div class="product-detail">
+        <div class="product-gallery">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <img src="{% static 'goods/placeholder/placeholder.jpg' %}" alt="placeholder">
+            {% endif %}
+        </div>
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <p class="product-price">Цена: {{ product.price }} руб.</p>
+            <div class="product-description">
+                <p>{{ product.description }}</p>
+            </div>
+            <div class="action-buttons">
+                <button class="buy-now">Купить сейчас</button>
+                <form method="POST" action="{% url 'add_to_cart' product.id product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="add-to-cart">Добавить в корзину</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Добавим секции для характеристик и отзывов -->
+    <div class="product-extra-info">
+        <!-- Характеристики -->
+        <div class="product-specs">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Характеристики</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Название продукта</td>
+                        <td>{{ product.name }}</td>
+                    </tr>
+                    {% for filter in product.filters.all %}
+                        <tr>
+                            <td>{{ filter.filter.name }}</td> <!-- Имя фильтра (например, "Бренд") -->
+                            <td>{{ filter.value }}</td> <!-- Значение фильтра (например, "Intel") -->
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="2">Нет выбранных фильтров</td>
+                        </tr>
+                    {% endfor %}
+                    <!-- Другие характеристики продукта -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</main>
+{% endblock %}

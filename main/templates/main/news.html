@@ -1,0 +1,20 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/news.css' %}">
+</head>
+<div class="news-detail">
+    <h1>{{ news.name }}</h1>
+    <img src="{{ news.image.url }}" alt="{{ news.name }}">
+    <p>{{ news.description|safe }}</p>  <!-- Добавляем |safe -->
+    <p>{{ news.content }}</p>
+    <p>Дата публикации: {{ news.published_at|date:"d.m.Y H:i" }}</p> <!-- Изменено на published_at -->
+</div>
+{% endblock %}

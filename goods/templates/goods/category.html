@@ -1,0 +1,90 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'goods/category.css' %}">
+</head>
+<body>
+    <div class="container1">
+        <aside class="sidebar">
+            <h2>Навигация</h2>
+            <ul class="catalog-list">
+                {% for category in categories %}
+                    <li>
+                        <a href="{% url 'category' catalog.id %}">{{ category.name }}</a>
+                        {% if category.subcategories.count > 0 %}
+                            <ul class="subcategory-list">
+                                {% for subcategory in category.subcategories.all %}
+                                    <li>
+                                        <a href="{% url 'subcategory' catalog.id subcategory.id %}">
+                                            {{ subcategory.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+        
+        
+        <main class="main-content">
+            <h1>{{ catalog.name }}</h1>
+
+            <div class="filter-options">
+                <div class="dropdown">
+                    <button class="dropbtn" id="currentFilter">{{ current_filter_name }}</button>
+                    <div class="dropdown-content">
+                        <a href="?sort=price_asc" class="link" onclick="updateFilter('По цене (возрастание)', 'price_asc')">По цене (возрастание)</a>
+                        <a href="?sort=price_desc" class="link" onclick="updateFilter('По цене (убывание)', 'price_desc')">По цене (убывание)</a>
+                        <a href="?sort=name_asc" class="link" onclick="updateFilter('По алфавиту (от А до Я)', 'name_asc')">По алфавиту (от А до Я)</a>
+                        <a href="?sort=name_desc" class="link" onclick="updateFilter('По алфавиту (от Я до А)', 'name_desc')">По алфавиту (от Я до А)</a>
+                    </div>
+                </div>
+            </div>
+                <div class="product-list">
+                {% for product in products %}
+                <div class="product">
+                    {% if product.image %}
+                        <a href="{% url 'product' catalog.id product.subcategory.id product.id %}">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'product' catalog.id product.subcategory.id product.id %}">
+                            <img src="{% static 'goods/placeholder/placeholder.jpg' %}" alt="placeholder">
+                        </a>
+                    {% endif %}
+                    <h3>
+                        <a href="{% url 'product' catalog.id product.subcategory.id product.id %}">
+                            {{ product.name }}
+                        </a>
+                    </h3>
+                    <p>{{ product.price }} руб.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+    <script>
+        // Функция для обновления фильтра
+        function updateFilter(filterName, filterValue) {
+            // Обновляем текст кнопки
+            document.getElementById('currentFilter').innerText = 'Сортировать по: ' + filterName;
+    
+            // Обновляем URL (можно использовать history.replaceState для изменения URL без перезагрузки страницы)
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('sort', filterValue);
+            window.history.pushState({}, '', newUrl);
+            
+            // Если необходимо, можно также перезагрузить страницу с новыми параметрами
+            // window.location.href = newUrl;
+        }
+    </script>
+</body>
+{% endblock %}

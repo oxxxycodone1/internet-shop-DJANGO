@@ -1,0 +1,17 @@
+/* Пример стилей для изменения внешнего вида админки */
+table {
+    background-color: #f9f9f9;
+}
+
+thead {
+    background-color: #007bff;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}

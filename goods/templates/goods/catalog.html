@@ -1,0 +1,34 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'goods/catalog.css' %}">
+</head>
+<div class="catalog-container">
+    <h1>Каталоги</h1>
+    {% for item in catalogs %}
+        <div class="catalog-block">
+            <a href="{% url 'category' item.id %}" class="catalog-link"> 
+                <div class="catalog-content">
+                    <img src="{% static 'goods/logo/player.jpg' %}" alt="{{ item.name }}">
+                    <div class="catalog-text">
+                        <h2 class="catalog-title">{{ item.name }}</h2>
+                        <p>{{ item.product_count }} товаров</p>
+                        <p>Каталог ID: {{ item.id }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    {% empty %}
+        <p>Нет доступных каталогов.</p>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
