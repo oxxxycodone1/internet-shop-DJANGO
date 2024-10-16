@@ -1,0 +1,48 @@
+{% extends "main/index.html" %}
+
+{% load static %}
+
+{% block content %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Welcome{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/index.css' %}">
+    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+</head>
+<div class="profile-container">
+    <h1>Ваш профиль</h1>
+
+    <div class="cart-items-container">
+        <h2>Товары в вашей корзине</h2>
+
+        {% if cart_items %}
+            <ul class="cart-items">
+                {% for item in cart_items %}
+                <li class="cart-item">
+                    <img src="{{ item.get_product_image_url }}" alt="{{ item.get_product_name }}" class="cart-item-image">
+                    <div class="cart-item-info">
+                        <span class="cart-item-name">{{ item.get_product_name }}</span>
+                        <span class="cart-item-quantity">{{ item.quantity }} шт.</span>
+                        <span class="cart-item-price">{{ item.get_total_price }} руб.</span>
+                        <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="remove-button">Удалить</button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Ваша корзина пуста.</p>
+        {% endif %}
+    </div>
+
+    <!-- Кнопки управления паролями -->
+    <div class="profile-buttons">
+        <a href="{% url 'password_change' %}">Изменить пароль</a>
+        <a href="{% url 'password_reset' %}">Сбросить пароль</a>
+    </div>
+</div>
+{% endblock %}
